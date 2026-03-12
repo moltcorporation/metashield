@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { db } from "@/db";
-import { reports } from "@/db/schema";
+import { reports, paidEntitlements } from "@/db/schema";
 import { fetchAndParseMeta } from "@/lib/parser";
 import { scoreMetaData } from "@/lib/scoring";
 import { checkCrawlability } from "@/lib/crawlability";
-import { sql } from "drizzle-orm";
+import { sql, eq, and } from "drizzle-orm";
 
 const FREE_LIMIT = 5;
 const WINDOW_MS = 24 * 60 * 60 * 1000;
@@ -30,49 +30,63 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Check Pro status
+  const proEmail = request.cookies.get("metashield_pro_email")?.value;
+  let isPro = false;
+  if (proEmail) {
+    const [entitlement] = await db
+      .select()
+      .from(paidEntitlements)
+      .where(and(eq(paidEntitlements.email, proEmail.toLowerCase().trim()), eq(paidEntitlements.active, true)))
+      .limit(1);
+    isPro = !!entitlement;
+  }
+
   // Hash the client IP for rate limiting (never store raw IP)
   const forwarded = request.headers.get("x-forwarded-for");
   const ip = forwarded?.split(",")[0]?.trim() || "unknown";
   const ipHash = createHash("sha256").update(ip).digest("hex");
 
-  // Rate limiting: 5 checks per 24 hours per IP
-  const windowStart = new Date(Date.now() - WINDOW_MS);
-  const [countResult] = await db
-    .select({ count: sql<number>`count(*)::int` })
-    .from(reports)
-    .where(
-      sql`${reports.ipHash} = ${ipHash} AND ${reports.createdAt} >= ${windowStart}`
-    );
-
-  const used = countResult?.count ?? 0;
-
-  if (used >= FREE_LIMIT) {
-    // Find when the oldest report in the window expires
-    const [oldest] = await db
-      .select({ createdAt: reports.createdAt })
+  // Rate limiting: Pro users bypass
+  let used = 0;
+  if (!isPro) {
+    const windowStart = new Date(Date.now() - WINDOW_MS);
+    const [countResult] = await db
+      .select({ count: sql<number>`count(*)::int` })
       .from(reports)
       .where(
         sql`${reports.ipHash} = ${ipHash} AND ${reports.createdAt} >= ${windowStart}`
-      )
-      .orderBy(reports.createdAt)
-      .limit(1);
+      );
 
-    const resetAt = oldest?.createdAt
-      ? new Date(oldest.createdAt.getTime() + WINDOW_MS)
-      : new Date(Date.now() + WINDOW_MS);
+    used = countResult?.count ?? 0;
 
-    const resetInMs = resetAt.getTime() - Date.now();
-    const resetInMin = Math.ceil(resetInMs / 60000);
+    if (used >= FREE_LIMIT) {
+      const [oldest] = await db
+        .select({ createdAt: reports.createdAt })
+        .from(reports)
+        .where(
+          sql`${reports.ipHash} = ${ipHash} AND ${reports.createdAt} >= ${windowStart}`
+        )
+        .orderBy(reports.createdAt)
+        .limit(1);
 
-    return NextResponse.json(
-      {
-        error: "Rate limit exceeded. Free tier allows 5 checks per 24 hours.",
-        remaining: 0,
-        limit: FREE_LIMIT,
-        resetIn: `${resetInMin} minutes`,
-      },
-      { status: 429 }
-    );
+      const resetAt = oldest?.createdAt
+        ? new Date(oldest.createdAt.getTime() + WINDOW_MS)
+        : new Date(Date.now() + WINDOW_MS);
+
+      const resetInMs = resetAt.getTime() - Date.now();
+      const resetInMin = Math.ceil(resetInMs / 60000);
+
+      return NextResponse.json(
+        {
+          error: "Rate limit exceeded. Free tier allows 5 checks per 24 hours. Upgrade to Pro for unlimited.",
+          remaining: 0,
+          limit: FREE_LIMIT,
+          resetIn: `${resetInMin} minutes`,
+        },
+        { status: 429 }
+      );
+    }
   }
 
   // Fetch and parse the URL
@@ -104,12 +118,13 @@ export async function POST(request: NextRequest) {
     })
     .returning({ id: reports.id });
 
-  const remaining = FREE_LIMIT - used - 1;
+  const remaining = isPro ? -1 : FREE_LIMIT - used - 1;
 
   return NextResponse.json({
     id: report.id,
     score: scoringResult.score,
     remaining,
-    limit: FREE_LIMIT,
+    limit: isPro ? -1 : FREE_LIMIT,
+    isPro,
   });
 }
