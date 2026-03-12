@@ -94,8 +94,8 @@ export default function Home() {
 
           <div className="flex flex-col gap-3">
             <h1 className="text-4xl font-extrabold tracking-tight text-stone-900 sm:text-5xl dark:text-white">
-              See how your links
-              <span className="block text-orange-600 dark:text-orange-400">really look</span>
+              Free Twitter Card Validator
+              <span className="block text-orange-600 dark:text-orange-400">&amp; OG Image Tester</span>
             </h1>
             <p className="mx-auto max-w-md text-lg text-stone-600 dark:text-stone-400">
               Check your meta tags, Open Graph, and Twitter Cards. See exactly how
