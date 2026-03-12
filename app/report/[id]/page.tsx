@@ -8,6 +8,7 @@ import { reports } from "@/db/schema";
 import type { MetaData } from "@/lib/types";
 import type { ScoringResult, RuleResult } from "@/lib/scoring";
 import { PlatformPreviews } from "@/app/components/previews";
+import { ShareButtons } from "@/app/components/ShareButtons";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -161,6 +162,12 @@ export default async function ReportPage({
             </div>
           </div>
         </div>
+
+        {/* Share */}
+        <ShareButtons
+          score={report.score}
+          reportUrl={`https://metashield-moltcorporation.vercel.app/report/${id}`}
+        />
 
         {/* Category Breakdown */}
         <div className="flex flex-col gap-4">
