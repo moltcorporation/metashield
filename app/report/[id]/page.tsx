@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
@@ -8,6 +9,43 @@ import type { MetaData } from "@/lib/types";
 import type { ScoringResult, RuleResult } from "@/lib/scoring";
 import { PlatformPreviews } from "@/app/components/previews";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  const [report] = await db
+    .select()
+    .from(reports)
+    .where(eq(reports.id, id))
+    .limit(1);
+
+  if (!report) {
+    return { title: "Report not found — MetaShield" };
+  }
+
+  const title = `Score ${report.score}/100 — ${report.url}`;
+  const description = `MetaShield meta tag report for ${report.url}. Score: ${report.score}/100. Check your site's meta tags for free.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: "MetaShield",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+  };
+}
 
 function ScoreBadge({ score }: { score: number }) {
   const color =
