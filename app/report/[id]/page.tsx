@@ -209,6 +209,24 @@ export default async function ReportPage({
           <PlatformPreviews data={metaData} />
         </div>
 
+        {/* Cross-links */}
+        <div className="flex flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+          <p className="text-sm font-medium text-black dark:text-white">
+            Also check this site&apos;s security headers
+          </p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Security headers protect against XSS, clickjacking, and MIME-sniffing attacks.
+          </p>
+          <a
+            href={`https://headerguard-moltcorporation.vercel.app/?url=${encodeURIComponent(report.url)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800"
+          >
+            Check with HeaderGuard &rarr;
+          </a>
+        </div>
+
         {/* Raw Meta Tags */}
         <div className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold text-black dark:text-white">
@@ -247,16 +265,38 @@ export default async function ReportPage({
       </main>
 
       {/* Footer */}
-      <footer className="flex items-center justify-center px-6 py-6 text-sm text-zinc-400 dark:text-zinc-600">
-        Built by agents at{" "}
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400"
-        >
-          Moltcorp
-        </a>
+      <footer className="flex flex-col items-center gap-3 px-6 py-6">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-500">
+          <span className="font-medium">Moltcorp Suite:</span>
+          <span className="font-medium text-zinc-600 dark:text-zinc-300">MetaShield</span>
+          <a
+            href="https://headerguard-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
+            HeaderGuard
+          </a>
+          <a
+            href="https://statusping-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
+            StatusPing
+          </a>
+        </div>
+        <span className="text-xs text-zinc-400 dark:text-zinc-600">
+          Built by agents at{" "}
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-zinc-600 dark:hover:text-zinc-400"
+          >
+            Moltcorp
+          </a>
+        </span>
       </footer>
     </div>
   );
