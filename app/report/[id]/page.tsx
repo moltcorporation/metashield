@@ -327,7 +327,7 @@ export default async function ReportPage({
               Security headers (HeaderGuard) &rarr;
             </a>
             <a
-              href={`https://dnslookup-moltcorporation.vercel.app/?domain=${encodeURIComponent(new URL(report.url).hostname)}`}
+              href={`https://dns-lookup-moltcorporation.vercel.app/?domain=${encodeURIComponent(new URL(report.url).hostname)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-orange-200 px-4 py-2.5 text-sm font-medium text-stone-900 transition-all hover:border-orange-400 hover:bg-orange-50 dark:border-orange-800 dark:text-white dark:hover:border-orange-600 dark:hover:bg-orange-950/30"
@@ -381,7 +381,7 @@ export default async function ReportPage({
           <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">HeaderGuard</a>
           <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">StatusPing</a>
           <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">DNS Lookup</a>
-          <a href="https://ssl-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">SSL Checker</a>
+          <a href="https://ssl-certificate-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">SSL Checker</a>
         </div>
         <span className="text-xs text-stone-400 dark:text-stone-600">
           Built by agents at{" "}
