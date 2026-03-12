@@ -49,55 +49,94 @@ export async function generateMetadata({
 }
 
 function ScoreBadge({ score }: { score: number }) {
+  const ring =
+    score >= 80
+      ? "ring-emerald-200 dark:ring-emerald-900"
+      : score >= 50
+        ? "ring-amber-200 dark:ring-amber-900"
+        : "ring-red-200 dark:ring-red-900";
+
   const color =
     score >= 80
-      ? "text-green-600 dark:text-green-400"
+      ? "text-emerald-600 dark:text-emerald-400"
       : score >= 50
-        ? "text-yellow-600 dark:text-yellow-400"
+        ? "text-amber-600 dark:text-amber-400"
         : "text-red-600 dark:text-red-400";
 
   const bg =
     score >= 80
-      ? "bg-green-50 dark:bg-green-950"
+      ? "bg-emerald-50 dark:bg-emerald-950/50"
       : score >= 50
-        ? "bg-yellow-50 dark:bg-yellow-950"
-        : "bg-red-50 dark:bg-red-950";
+        ? "bg-amber-50 dark:bg-amber-950/50"
+        : "bg-red-50 dark:bg-red-950/50";
 
   return (
-    <div
-      className={`flex h-24 w-24 flex-col items-center justify-center rounded-full ${bg}`}
-    >
-      <span className={`text-3xl font-bold ${color}`}>{score}</span>
-      <span className="text-xs text-zinc-500 dark:text-zinc-400">/100</span>
+    <div className={`flex h-28 w-28 flex-col items-center justify-center rounded-2xl ring-2 ${ring} ${bg}`}>
+      <span className={`text-4xl font-extrabold tabular-nums ${color}`}>{score}</span>
+      <span className="text-xs font-medium text-stone-500 dark:text-stone-400">/100</span>
     </div>
   );
 }
 
 function StatusIcon({ status }: { status: string }) {
   if (status === "pass")
-    return <span className="text-green-600 dark:text-green-400">&#10003;</span>;
+    return (
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-xs text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-400">
+        &#10003;
+      </span>
+    );
   if (status === "warn")
     return (
-      <span className="text-yellow-600 dark:text-yellow-400">&#9888;</span>
+      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-100 text-xs text-amber-700 dark:bg-amber-900/50 dark:text-amber-400">
+        &#9888;
+      </span>
     );
-  return <span className="text-red-600 dark:text-red-400">&#10005;</span>;
+  return (
+    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs text-red-700 dark:bg-red-900/50 dark:text-red-400">
+      &#10005;
+    </span>
+  );
 }
 
 function RuleItem({ rule }: { rule: RuleResult }) {
+  const borderColor =
+    rule.status === "pass"
+      ? "border-emerald-100 dark:border-emerald-900/30"
+      : rule.status === "warn"
+        ? "border-amber-100 dark:border-amber-900/30"
+        : "border-red-100 dark:border-red-900/30";
+
   return (
-    <div className="flex flex-col gap-1 rounded-lg border border-zinc-200 p-3 dark:border-zinc-800">
-      <div className="flex items-center gap-2">
+    <div className={`flex flex-col gap-1.5 rounded-xl border ${borderColor} bg-white p-4 dark:bg-stone-900`}>
+      <div className="flex items-center gap-2.5">
         <StatusIcon status={rule.status} />
-        <span className="text-sm text-black dark:text-white">
+        <span className="text-sm text-stone-900 dark:text-white">
           {rule.message}
         </span>
       </div>
       {rule.fix && (
-        <code className="mt-1 block rounded bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+        <code className="mt-1 block rounded-lg bg-orange-50 px-3 py-2 font-mono text-xs text-orange-800 dark:bg-orange-950/30 dark:text-orange-300">
           {rule.fix}
         </code>
       )}
     </div>
+  );
+}
+
+function EyeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M8 32s8-16 24-16 24 16 24 16-8 16-24 16S8 32 8 32z"
+        fill="currentColor"
+        fillOpacity="0.1"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <circle cx="32" cy="32" r="8" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.2" />
+      <circle cx="32" cy="32" r="3" fill="currentColor" />
+    </svg>
   );
 }
 
@@ -122,18 +161,17 @@ export default async function ReportPage({
   const scoring = report.issues as unknown as ScoringResult;
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
-      {/* Header */}
+    <div className="flex min-h-screen flex-col bg-orange-50/30 font-sans dark:bg-stone-950">
       <header className="flex items-center justify-between px-6 py-4">
-        <Link
-          href="/"
-          className="text-lg font-bold tracking-tight text-black dark:text-white"
-        >
-          MetaShield
+        <Link href="/" className="flex items-center gap-2">
+          <EyeIcon className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+          <span className="text-lg font-bold tracking-tight text-stone-900 dark:text-white">
+            MetaShield
+          </span>
         </Link>
         <Link
           href="/"
-          className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+          className="rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400"
         >
           Check another URL
         </Link>
@@ -141,24 +179,30 @@ export default async function ReportPage({
 
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-8">
         {/* Score + URL */}
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+        <div className="flex flex-col items-center gap-5 rounded-2xl border border-orange-100 bg-white p-6 sm:flex-row sm:gap-6 dark:border-orange-900/30 dark:bg-stone-900">
           <ScoreBadge score={report.score} />
           <div className="flex flex-col gap-1 text-center sm:text-left">
-            <h1 className="text-xl font-semibold text-black dark:text-white">
+            <h1 className="text-xl font-bold text-stone-900 dark:text-white">
               Meta Tag Report
             </h1>
             <a
               href={report.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+              className="text-sm text-orange-600 hover:text-orange-800 dark:text-orange-400 dark:hover:text-orange-300"
             >
               {report.url}
             </a>
-            <div className="mt-1 flex gap-3 text-xs text-zinc-400 dark:text-zinc-500">
-              <span>{scoring.passCount} passed</span>
-              <span>{scoring.warnCount} warnings</span>
-              <span>{scoring.failCount} failed</span>
+            <div className="mt-2 flex gap-4 text-xs">
+              <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 font-medium text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400">
+                {scoring.passCount} passed
+              </span>
+              <span className="rounded-full bg-amber-50 px-2.5 py-0.5 font-medium text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">
+                {scoring.warnCount} warnings
+              </span>
+              <span className="rounded-full bg-red-50 px-2.5 py-0.5 font-medium text-red-700 dark:bg-red-950/50 dark:text-red-400">
+                {scoring.failCount} failed
+              </span>
             </div>
           </div>
         </div>
@@ -170,23 +214,23 @@ export default async function ReportPage({
         />
 
         {/* Category Breakdown */}
-        <div className="flex flex-col gap-4">
-          <h2 className="text-lg font-semibold text-black dark:text-white">
+        <div className="flex flex-col gap-6">
+          <h2 className="text-lg font-bold text-stone-900 dark:text-white">
             Score Breakdown
           </h2>
           {scoring.categories.map((cat) => (
-            <div key={cat.category} className="flex flex-col gap-2">
+            <div key={cat.category} className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-black dark:text-white">
+                <span className="font-semibold text-stone-900 dark:text-white">
                   {cat.label}
                 </span>
-                <span className="text-sm text-zinc-500 dark:text-zinc-400">
+                <span className="rounded-full bg-orange-50 px-2.5 py-0.5 text-xs font-bold tabular-nums text-orange-700 dark:bg-orange-950/50 dark:text-orange-300">
                   {cat.earned}/{cat.possible}
                 </span>
               </div>
-              <div className="h-2 rounded-full bg-zinc-200 dark:bg-zinc-800">
+              <div className="h-2 overflow-hidden rounded-full bg-orange-100 dark:bg-orange-950/30">
                 <div
-                  className="h-2 rounded-full bg-black dark:bg-white"
+                  className="h-2 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 transition-all dark:from-orange-400 dark:to-amber-400"
                   style={{
                     width: `${cat.possible > 0 ? (cat.earned / cat.possible) * 100 : 0}%`,
                   }}
@@ -203,43 +247,50 @@ export default async function ReportPage({
 
         {/* Platform Previews */}
         <div className="flex flex-col gap-4">
-          <h2 className="text-lg font-semibold text-black dark:text-white">
+          <h2 className="text-lg font-bold text-stone-900 dark:text-white">
             Platform Previews
           </h2>
           <PlatformPreviews data={metaData} />
         </div>
 
         {/* Cross-links */}
-        <div className="flex flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-          <p className="text-sm font-medium text-black dark:text-white">
-            Also check this site&apos;s security headers
+        <div className="flex flex-col gap-3 rounded-2xl border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900">
+          <p className="text-sm font-semibold text-stone-900 dark:text-white">
+            Also check this site
           </p>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
-            Security headers protect against XSS, clickjacking, and MIME-sniffing attacks.
-          </p>
-          <a
-            href={`https://headerguard-moltcorporation.vercel.app/?url=${encodeURIComponent(report.url)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-fit items-center gap-2 rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800"
-          >
-            Check with HeaderGuard &rarr;
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={`https://headerguard-moltcorporation.vercel.app/?url=${encodeURIComponent(report.url)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-orange-200 px-4 py-2.5 text-sm font-medium text-stone-900 transition-all hover:border-orange-400 hover:bg-orange-50 dark:border-orange-800 dark:text-white dark:hover:border-orange-600 dark:hover:bg-orange-950/30"
+            >
+              Security headers (HeaderGuard) &rarr;
+            </a>
+            <a
+              href={`https://dnslookup-moltcorporation.vercel.app/?domain=${encodeURIComponent(new URL(report.url).hostname)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl border border-orange-200 px-4 py-2.5 text-sm font-medium text-stone-900 transition-all hover:border-orange-400 hover:bg-orange-50 dark:border-orange-800 dark:text-white dark:hover:border-orange-600 dark:hover:bg-orange-950/30"
+            >
+              DNS records &rarr;
+            </a>
+          </div>
         </div>
 
         {/* Raw Meta Tags */}
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-semibold text-black dark:text-white">
+        <details className="overflow-hidden rounded-2xl border border-orange-100 dark:border-orange-900/30">
+          <summary className="cursor-pointer bg-white px-5 py-4 text-base font-bold text-stone-900 dark:bg-stone-900 dark:text-white">
             All Meta Tags
-          </h2>
-          <div className="overflow-x-auto rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+          </summary>
+          <div className="overflow-x-auto border-t border-orange-100 bg-white p-4 dark:border-orange-900/30 dark:bg-stone-900">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-700">
-                  <th className="pb-2 pr-4 text-left font-medium text-zinc-500 dark:text-zinc-400">
+                <tr className="border-b border-orange-100 dark:border-orange-900/30">
+                  <th className="pb-2 pr-4 text-left text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
                     Tag
                   </th>
-                  <th className="pb-2 text-left font-medium text-zinc-500 dark:text-zinc-400">
+                  <th className="pb-2 text-left text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
                     Value
                   </th>
                 </tr>
@@ -248,12 +299,12 @@ export default async function ReportPage({
                 {Object.entries(metaData.allMeta).map(([key, value]) => (
                   <tr
                     key={key}
-                    className="border-b border-zinc-100 dark:border-zinc-800"
+                    className="border-b border-stone-100 last:border-0 dark:border-stone-800"
                   >
-                    <td className="py-1.5 pr-4 font-mono text-xs text-zinc-600 dark:text-zinc-400">
+                    <td className="py-2 pr-4 font-mono text-xs font-medium text-orange-700 dark:text-orange-400">
                       {key}
                     </td>
-                    <td className="py-1.5 text-xs text-black dark:text-white">
+                    <td className="max-w-md break-all py-2 font-mono text-xs text-stone-700 dark:text-stone-300">
                       {value}
                     </td>
                   </tr>
@@ -261,41 +312,19 @@ export default async function ReportPage({
               </tbody>
             </table>
           </div>
-        </div>
+        </details>
       </main>
 
-      {/* Footer */}
-      <footer className="flex flex-col items-center gap-3 px-6 py-6">
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-500">
+      <footer className="flex flex-col items-center gap-3 border-t border-orange-100 px-6 py-6 dark:border-orange-900/20">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
           <span className="font-medium">Moltcorp Suite:</span>
-          <span className="font-medium text-zinc-600 dark:text-zinc-300">MetaShield</span>
-          <a
-            href="https://headerguard-moltcorporation.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-zinc-600 dark:hover:text-zinc-300"
-          >
-            HeaderGuard
-          </a>
-          <a
-            href="https://statusping-moltcorporation.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-zinc-600 dark:hover:text-zinc-300"
-          >
-            StatusPing
-          </a>
+          <span className="font-semibold text-orange-600 dark:text-orange-400">MetaShield</span>
+          <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">HeaderGuard</a>
+          <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">StatusPing</a>
         </div>
-        <span className="text-xs text-zinc-400 dark:text-zinc-600">
+        <span className="text-xs text-stone-400 dark:text-stone-600">
           Built by agents at{" "}
-          <a
-            href="https://moltcorporation.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-zinc-600 dark:hover:text-zinc-400"
-          >
-            Moltcorp
-          </a>
+          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">Moltcorp</a>
         </span>
       </footer>
     </div>
