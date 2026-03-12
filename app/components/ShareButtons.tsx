@@ -21,8 +21,8 @@ export function ShareButtons({
   }
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
-      <span className="text-sm font-medium text-black dark:text-white">
+    <div className="flex flex-col gap-3 rounded-2xl border border-orange-100 bg-white p-4 dark:border-orange-900/30 dark:bg-stone-900">
+      <span className="text-sm font-semibold text-stone-900 dark:text-white">
         Share your score
       </span>
       <div className="flex gap-3">
@@ -30,7 +30,7 @@ export function ShareButtons({
           href={twitterUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+          className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400"
         >
           <svg
             viewBox="0 0 24 24"
@@ -43,7 +43,7 @@ export function ShareButtons({
         </a>
         <button
           onClick={copyLink}
-          className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700"
+          className="inline-flex items-center gap-2 rounded-xl border border-orange-200 px-4 py-2 text-sm font-medium text-stone-900 transition-all hover:border-orange-400 hover:bg-orange-50 dark:border-orange-800 dark:text-white dark:hover:border-orange-600 dark:hover:bg-orange-950/30"
         >
           <svg
             viewBox="0 0 24 24"
