@@ -7,6 +7,7 @@ import { db } from "@/db";
 import { reports } from "@/db/schema";
 import type { MetaData } from "@/lib/types";
 import type { ScoringResult, RuleResult } from "@/lib/scoring";
+import type { CrawlabilityResult, CrawlabilityCheck } from "@/lib/crawlability";
 import { PlatformPreviews } from "@/app/components/previews";
 import { ShareButtons } from "@/app/components/ShareButtons";
 import Link from "next/link";
@@ -157,8 +158,10 @@ export default async function ReportPage({
     notFound();
   }
 
-  const metaData = report.metaData as MetaData;
+  const rawMetaData = report.metaData as MetaData & { crawlability?: CrawlabilityResult };
+  const metaData = rawMetaData;
   const scoring = report.issues as unknown as ScoringResult;
+  const crawlability = rawMetaData.crawlability || null;
 
   return (
     <div className="flex min-h-screen flex-col bg-orange-50/30 font-sans dark:bg-stone-950">
@@ -252,6 +255,62 @@ export default async function ReportPage({
           </h2>
           <PlatformPreviews data={metaData} />
         </div>
+
+        {/* Crawlability */}
+        {crawlability && crawlability.checks.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <h2 className="text-lg font-semibold text-black dark:text-white">
+              Crawlability
+            </h2>
+            <div className="flex flex-col gap-2">
+              {crawlability.checks.map((check: CrawlabilityCheck) => {
+                const statusStyles: Record<string, { icon: string; border: string; bg: string; text: string }> = {
+                  pass: {
+                    icon: "\u2713",
+                    border: "border-green-200 dark:border-green-900",
+                    bg: "bg-green-50 dark:bg-green-950",
+                    text: "text-green-700 dark:text-green-300",
+                  },
+                  warn: {
+                    icon: "\u26A0",
+                    border: "border-yellow-200 dark:border-yellow-900",
+                    bg: "bg-yellow-50 dark:bg-yellow-950",
+                    text: "text-yellow-700 dark:text-yellow-300",
+                  },
+                  fail: {
+                    icon: "\u2717",
+                    border: "border-red-200 dark:border-red-900",
+                    bg: "bg-red-50 dark:bg-red-950",
+                    text: "text-red-700 dark:text-red-300",
+                  },
+                  info: {
+                    icon: "\u2139",
+                    border: "border-blue-200 dark:border-blue-900",
+                    bg: "bg-blue-50 dark:bg-blue-950",
+                    text: "text-blue-700 dark:text-blue-300",
+                  },
+                };
+                const s = statusStyles[check.status] || statusStyles.info;
+                return (
+                  <div
+                    key={check.id}
+                    className={`flex items-start gap-3 rounded-lg border p-3 ${s.border} ${s.bg}`}
+                  >
+                    <span className={`mt-0.5 text-sm ${s.text}`}>{s.icon}</span>
+                    <div className="flex flex-col gap-0.5">
+                      <span className={`text-xs font-medium ${s.text}`}>
+                        {check.label}
+                      </span>
+                      <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                        {check.message}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Cross-links */}
         <div className="flex flex-col gap-3 rounded-2xl border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900">
