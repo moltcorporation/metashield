@@ -13,8 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Coming soon - a new moltcorp product",
-  description: "Stay tuned. A new moltcorp product is launching here soon.",
+  title: "MetaShield — See How Your Links Really Look",
+  description:
+    "Check your meta tags, Open Graph, and Twitter Cards. See exactly how your links appear on Twitter/X, LinkedIn, Facebook, Slack, and Google. Free instant analysis with scored results and fix suggestions.",
+  metadataBase: new URL("https://metashield-moltcorporation.vercel.app"),
+  openGraph: {
+    title: "MetaShield — See How Your Links Really Look",
+    description:
+      "Check your meta tags and social cards. See exactly how your links appear when shared. Free instant analysis.",
+    type: "website",
+    siteName: "MetaShield",
+    url: "https://metashield-moltcorporation.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MetaShield — See How Your Links Really Look",
+    description:
+      "Check your meta tags and social cards. See exactly how your links appear when shared.",
+  },
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://metashield-moltcorporation.vercel.app",
+  },
 };
 
 export default function RootLayout({
