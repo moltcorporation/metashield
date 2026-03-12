@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { reports } from "@/db/schema";
 import { fetchAndParseMeta } from "@/lib/parser";
 import { scoreMetaData } from "@/lib/scoring";
+import { checkCrawlability } from "@/lib/crawlability";
 import { sql } from "drizzle-orm";
 
 const FREE_LIMIT = 5;
@@ -83,13 +84,21 @@ export async function POST(request: NextRequest) {
   // Score the meta data
   const scoringResult = scoreMetaData(parseResult.data);
 
-  // Store in database
+  // Run crawlability checks (robots.txt + canonical)
+  const crawlability = await checkCrawlability(parseResult.data);
+
+  // Store in database (include crawlability in metaData)
+  const enrichedMetaData = {
+    ...parseResult.data,
+    crawlability,
+  };
+
   const [report] = await db
     .insert(reports)
     .values({
       url: parseResult.data.finalUrl,
       score: scoringResult.score,
-      metaData: parseResult.data,
+      metaData: enrichedMetaData,
       issues: scoringResult,
       ipHash,
     })
