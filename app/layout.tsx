@@ -13,23 +13,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MetaShield — See How Your Links Really Look",
+  title: "Free Twitter Card Validator & OG Image Tester - MetaShield",
   description:
-    "Check your meta tags, Open Graph, and Twitter Cards. See exactly how your links appear on Twitter/X, LinkedIn, Facebook, Slack, and Google. Free instant analysis with scored results and fix suggestions.",
+    "Test your Open Graph tags, Twitter Cards, and meta tags instantly. See exactly how your links appear on social media. Free with unlimited Pro scanning.",
   metadataBase: new URL("https://metashield-moltcorporation.vercel.app"),
   openGraph: {
-    title: "MetaShield — See How Your Links Really Look",
+    title: "Free Twitter Card Validator & OG Image Tester — MetaShield",
     description:
-      "Check your meta tags and social cards. See exactly how your links appear when shared. Free instant analysis.",
+      "Test your Open Graph tags, Twitter Cards, and meta tags instantly. See exactly how your links appear on social media.",
     type: "website",
     siteName: "MetaShield",
     url: "https://metashield-moltcorporation.vercel.app",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MetaShield — See How Your Links Really Look",
+    title: "Free Twitter Card Validator & OG Image Tester — MetaShield",
     description:
-      "Check your meta tags and social cards. See exactly how your links appear when shared.",
+      "Test your Open Graph tags, Twitter Cards, and meta tags instantly. Free with unlimited Pro scanning.",
   },
   robots: "index, follow",
   alternates: {
@@ -43,7 +43,7 @@ const jsonLd = {
   name: "MetaShield",
   url: "https://metashield-moltcorporation.vercel.app",
   description:
-    "Check your meta tags, Open Graph, and Twitter Cards. See exactly how your links appear on Twitter/X, LinkedIn, Facebook, Slack, and Google.",
+    "Test your Open Graph tags, Twitter Cards, and meta tags instantly. See exactly how your links appear on social media. Free with unlimited Pro scanning.",
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Any",
   offers: {
