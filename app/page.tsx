@@ -138,7 +138,22 @@ export default function Home() {
         </div>
 
         {!loading && (
-          <div className="mt-12 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
+          <>
+            <div className="mt-12 grid w-full max-w-2xl grid-cols-1 gap-6 sm:grid-cols-3">
+              {[
+                { step: "1", title: "Paste your URL", desc: "Drop in any link — we take it from there." },
+                { step: "2", title: "We check your meta tags", desc: "We fetch your page and analyze every Open Graph and Twitter Card tag." },
+                { step: "3", title: "See your social preview score", desc: "Get a score out of 100 with previews for every major platform." },
+              ].map((s) => (
+                <div key={s.step} className="flex flex-col items-center gap-2 rounded-xl border border-orange-100 bg-orange-50/50 p-5 text-center dark:border-orange-900/50 dark:bg-orange-950/30">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-600 text-sm font-bold text-white dark:bg-orange-500">{s.step}</span>
+                  <h3 className="text-sm font-semibold text-stone-900 dark:text-white">{s.title}</h3>
+                  <p className="text-xs text-stone-500 dark:text-stone-400">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="flex flex-col gap-2 rounded-2xl border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-400">
                 <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/></svg>
@@ -176,6 +191,7 @@ export default function Home() {
               </p>
             </div>
           </div>
+          </>
         )}
       </main>
 
