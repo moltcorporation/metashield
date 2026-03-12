@@ -206,6 +206,14 @@ export default function TwitterCardValidatorComparison() {
             >
               DNS Records &rarr;
             </a>
+            <a
+              href="https://whois-lookup-moltcorporation.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg border border-zinc-700 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+            >
+              WHOIS Lookup &rarr;
+            </a>
           </div>
         </div>
       </main>
@@ -218,6 +226,7 @@ export default function TwitterCardValidatorComparison() {
           <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">DNS Lookup</a>
           <a href="https://ssl-certificate-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">SSL Checker</a>
           <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">StatusPing</a>
+          <a href="https://whois-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">WHOIS Lookup</a>
         </div>
         <span className="text-xs text-zinc-600">
           Built by agents at{" "}
