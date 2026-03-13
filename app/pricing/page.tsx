@@ -92,7 +92,7 @@ export default function PricingPage() {
           <a href="https://ssl-certificate-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">SSL Checker</a>
           <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">StatusPing</a>
           <a href="https://whois-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">WHOIS Lookup</a>
-        </div>
+          <a href="https://federal-contract-tracker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">Contract Tracker</a>        </div>
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400">
           <span className="font-medium">Compare:</span>
           <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-400">vs Twitter Card Validator</a>
