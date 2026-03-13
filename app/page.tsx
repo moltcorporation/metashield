@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const STRIPE_LINK = "https://buy.stripe.com/test_6oU14n6q96nFeKz21S2ZO09";
+
 function EyeIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
@@ -20,15 +22,53 @@ function EyeIcon({ className }: { className?: string }) {
   );
 }
 
+function SampleScoreBadge() {
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-2xl border border-orange-100 bg-white p-6 dark:border-orange-900/30 dark:bg-stone-900">
+      <p className="text-xs font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500">
+        Sample Report
+      </p>
+      <div className="flex h-24 w-24 flex-col items-center justify-center rounded-2xl bg-emerald-50 ring-2 ring-emerald-200 dark:bg-emerald-950/50 dark:ring-emerald-900">
+        <span className="text-3xl font-extrabold tabular-nums text-emerald-600 dark:text-emerald-400">92</span>
+        <span className="text-xs font-medium text-stone-500 dark:text-stone-400">/100</span>
+      </div>
+      <div className="flex flex-col items-center gap-1">
+        <span className="text-sm font-semibold text-stone-900 dark:text-white">example.com</span>
+        <div className="flex gap-2 text-xs">
+          <span className="rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400">28 passed</span>
+          <span className="rounded-full bg-amber-50 px-2 py-0.5 font-medium text-amber-700 dark:bg-amber-950/50 dark:text-amber-400">2 warnings</span>
+          <span className="rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-700 dark:bg-red-950/50 dark:text-red-400">1 failed</span>
+        </div>
+      </div>
+      <div className="mt-1 w-full space-y-1.5">
+        <div className="flex items-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50/50 px-3 py-1.5 text-xs dark:border-emerald-900/30 dark:bg-emerald-950/30">
+          <span className="text-emerald-600 dark:text-emerald-400">&#10003;</span>
+          <span className="text-stone-700 dark:text-stone-300">og:title present</span>
+        </div>
+        <div className="flex items-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50/50 px-3 py-1.5 text-xs dark:border-emerald-900/30 dark:bg-emerald-950/30">
+          <span className="text-emerald-600 dark:text-emerald-400">&#10003;</span>
+          <span className="text-stone-700 dark:text-stone-300">twitter:card is set</span>
+        </div>
+        <div className="flex items-center gap-2 rounded-lg border border-amber-100 bg-amber-50/50 px-3 py-1.5 text-xs dark:border-amber-900/30 dark:bg-amber-950/30">
+          <span className="text-amber-600 dark:text-amber-400">&#9888;</span>
+          <span className="text-stone-700 dark:text-stone-300">Description could be longer</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [rateLimited, setRateLimited] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setRateLimited(false);
 
     let normalizedUrl = url.trim();
     if (!normalizedUrl) return;
@@ -58,6 +98,11 @@ export default function Home() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setRateLimited(true);
+          setLoading(false);
+          return;
+        }
         throw new Error(data?.error || "Something went wrong. Try again.");
       }
 
@@ -78,14 +123,22 @@ export default function Home() {
             MetaShield
           </span>
         </div>
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
-        >
-          by Moltcorp
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/pricing"
+            className="text-sm font-medium text-stone-600 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
+          >
+            Pricing
+          </a>
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
+          >
+            by Moltcorp
+          </a>
+        </div>
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-4 pb-24">
@@ -97,10 +150,19 @@ export default function Home() {
               Free Twitter Card Validator
               <span className="block text-orange-600 dark:text-orange-400">&amp; OG Image Tester</span>
             </h1>
+            <p className="mx-auto max-w-lg text-base font-medium text-stone-700 dark:text-stone-300">
+              Twitter killed their Card Validator. We replaced it — and made it better.
+            </p>
             <p className="mx-auto max-w-md text-lg text-stone-600 dark:text-stone-400">
               Check your meta tags, Open Graph, and Twitter Cards. See exactly how
               your page appears when shared on every platform.
             </p>
+          </div>
+
+          {/* Trust signal */}
+          <div className="flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 dark:border-orange-800 dark:bg-orange-950/40">
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-orange-600 dark:text-orange-400"><path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/></svg>
+            <span className="text-sm font-medium text-stone-700 dark:text-stone-300">1,000+ pages analyzed</span>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-2 flex w-full max-w-lg flex-col gap-3">
@@ -124,6 +186,24 @@ export default function Home() {
 
             {error && (
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            )}
+
+            {rateLimited && (
+              <div className="flex flex-col items-center gap-3 rounded-xl border border-orange-300 bg-orange-50 p-4 dark:border-orange-700 dark:bg-orange-950/40">
+                <p className="text-sm font-medium text-stone-800 dark:text-stone-200">
+                  You&apos;ve used all 5 free scans for today.
+                </p>
+                <p className="text-xs text-stone-500 dark:text-stone-400">
+                  Upgrade to Pro for unlimited scans — no waiting.
+                </p>
+                <a
+                  href={STRIPE_LINK}
+                  className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
+                >
+                  Upgrade to Pro — $5/mo
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
             )}
           </form>
 
@@ -151,6 +231,11 @@ export default function Home() {
                   <p className="text-xs text-stone-500 dark:text-stone-400">{s.desc}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Sample report card */}
+            <div className="mt-12 w-full max-w-sm">
+              <SampleScoreBadge />
             </div>
 
             <div className="mt-12 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
