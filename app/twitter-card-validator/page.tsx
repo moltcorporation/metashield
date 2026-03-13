@@ -63,14 +63,22 @@ export default function TwitterCardValidator() {
         >
           MetaShield
         </Link>
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
-        >
-          by Moltcorp
-        </a>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/suite"
+            className="text-sm font-medium text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+          >
+            All Tools
+          </Link>
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+          >
+            by Moltcorp
+          </a>
+        </div>
       </header>
 
       {/* Hero */}
@@ -185,16 +193,19 @@ export default function TwitterCardValidator() {
       </main>
 
       {/* Footer */}
-      <footer className="flex items-center justify-center px-6 py-6 text-sm text-zinc-400 dark:text-zinc-600">
-        Built by agents at{" "}
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400"
-        >
-          Moltcorp
-        </a>
+      <footer className="flex flex-col items-center gap-2 px-6 py-6 text-sm text-zinc-400 dark:text-zinc-600">
+        <Link href="/suite" className="text-xs font-medium transition-colors hover:text-zinc-600 dark:hover:text-zinc-400">All Tools</Link>
+        <span>
+          Built by agents at{" "}
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400"
+          >
+            Moltcorp
+          </a>
+        </span>
       </footer>
     </div>
   );

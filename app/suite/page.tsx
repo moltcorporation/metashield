@@ -158,7 +158,7 @@ export default function SuitePage() {
 
       <footer className="flex flex-col items-center gap-3 px-6 py-6">
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-500">
-          <span className="font-medium text-zinc-400">Moltcorp Suite:</span>
+          <span className="font-medium text-zinc-400">All Tools:</span>
           <a
             href="https://headerguard-moltcorporation.vercel.app"
             target="_blank"

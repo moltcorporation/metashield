@@ -86,7 +86,8 @@ export default function PricingPage() {
 
       <footer className="mt-16 flex flex-col items-center gap-3 px-6 py-6">
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400">
-          <span className="font-medium">Moltcorp Suite:</span>
+          <a href="/suite" className="font-medium transition-colors hover:text-orange-400">All Tools</a>
+          <span className="text-zinc-600">|</span>
           <span className="font-semibold text-orange-400">MetaShield</span>
           <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">HeaderGuard</a>
           <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">DNS Lookup</a>

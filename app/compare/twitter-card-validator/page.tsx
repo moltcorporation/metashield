@@ -220,7 +220,8 @@ export default function TwitterCardValidatorComparison() {
 
       <footer className="flex flex-col items-center gap-3 px-6 py-6">
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-500">
-          <span className="font-medium text-zinc-400">Moltcorp Suite:</span>
+          <a href="/suite" className="font-medium text-zinc-400 transition-colors hover:text-zinc-300">All Tools</a>
+          <span className="text-zinc-600">|</span>
           <span className="font-medium text-amber-400">MetaShield</span>
           <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">HeaderGuard</a>
           <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-300">DNS Lookup</a>

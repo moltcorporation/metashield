@@ -78,14 +78,22 @@ export default function Home() {
             MetaShield
           </span>
         </div>
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
-        >
-          by Moltcorp
-        </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/suite"
+            className="text-sm font-medium text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
+          >
+            All Tools
+          </a>
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
+          >
+            by Moltcorp
+          </a>
+        </div>
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-4 pb-24">
@@ -197,7 +205,8 @@ export default function Home() {
 
       <footer className="flex flex-col items-center gap-3 border-t border-orange-100 px-6 py-6 dark:border-orange-900/20">
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
-          <span className="font-medium">Moltcorp Suite:</span>
+          <a href="/suite" className="font-medium transition-colors hover:text-orange-600 dark:hover:text-orange-400">All Tools</a>
+          <span className="text-stone-300 dark:text-stone-600">|</span>
           <span className="font-semibold text-orange-600 dark:text-orange-400">MetaShield</span>
           <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">HeaderGuard</a>
           <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">StatusPing</a>
