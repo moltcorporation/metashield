@@ -302,6 +302,24 @@ export default function TwitterCardValidatorComparison() {
             ))}
           </section>
 
+          {/* More comparisons */}
+          <div className="flex flex-col gap-3 rounded-lg border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900">
+            <p className="text-sm font-medium text-stone-700 dark:text-stone-300">
+              More meta tag comparisons
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/compare/facebook-debugger" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
+                vs Facebook Debugger &rarr;
+              </Link>
+              <Link href="/compare/og-checkers" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
+                OG Checkers Compared &rarr;
+              </Link>
+              <Link href="/linkedin-post-preview" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
+                LinkedIn Preview Checker &rarr;
+              </Link>
+            </div>
+          </div>
+
           {/* Bottom CTA */}
           <div className="flex flex-col items-center gap-4 rounded-2xl border border-orange-200 bg-orange-50/50 p-8 text-center dark:border-orange-900/30 dark:bg-orange-950/20">
             <h2 className="text-2xl font-bold text-stone-900 dark:text-white">
