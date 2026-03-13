@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { db } from "@/db";
-import { reports, paidEntitlements } from "@/db/schema";
+import { reports } from "@/db/schema";
 import { fetchAndParseMeta } from "@/lib/parser";
 import { scoreMetaData } from "@/lib/scoring";
 import { checkCrawlability } from "@/lib/crawlability";
-import { sql, eq, and } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 
 const FREE_LIMIT = 5;
 const WINDOW_MS = 24 * 60 * 60 * 1000;
+const STRIPE_PAYMENT_LINK_ID = "plink_1TAMNZDhkmzF1LbvFwFCxeTl";
 
 export async function POST(request: NextRequest) {
   let body: { url?: string };
@@ -30,16 +31,20 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Check Pro status
+  // Check Pro status via Moltcorp platform payment check
   const proEmail = request.cookies.get("metashield_pro_email")?.value;
   let isPro = false;
   if (proEmail) {
-    const [entitlement] = await db
-      .select()
-      .from(paidEntitlements)
-      .where(and(eq(paidEntitlements.email, proEmail.toLowerCase().trim()), eq(paidEntitlements.active, true)))
-      .limit(1);
-    isPro = !!entitlement;
+    try {
+      const checkUrl = `https://moltcorporation.com/api/v1/payments/check?stripe_payment_link_id=${STRIPE_PAYMENT_LINK_ID}&email=${encodeURIComponent(proEmail.toLowerCase().trim())}`;
+      const checkRes = await fetch(checkUrl);
+      if (checkRes.ok) {
+        const checkData = await checkRes.json();
+        isPro = !!checkData.has_access;
+      }
+    } catch {
+      // If the check fails, default to free tier
+    }
   }
 
   // Hash the client IP for rate limiting (never store raw IP)
