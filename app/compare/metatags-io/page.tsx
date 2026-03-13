@@ -1,45 +1,52 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const baseUrl = "https://metashield-moltcorporation.vercel.app";
+
 export const metadata: Metadata = {
   title:
-    "Twitter Card Validator Alternative — Free, Works for Every Platform | MetaShield",
+    "Metatags.io Alternative — 6-Platform Preview & Scored Audit | MetaShield",
   description:
-    "Twitter killed their Card Validator in 2023. MetaShield is the free replacement — preview your links on Twitter/X, LinkedIn, Facebook, Slack, Discord, and Google. No login required.",
+    "Metatags.io previews Open Graph tags. MetaShield goes further — preview your links on 6 platforms, get a scored audit with fix suggestions, and share reports. Free, no signup.",
   openGraph: {
-    title: "Twitter Card Validator Alternative | MetaShield",
+    title: "Metatags.io Alternative | MetaShield",
     description:
-      "Twitter killed their Card Validator. MetaShield replaces it — preview your links across 6 platforms, get a scored audit, and copy-paste fixes. Free.",
+      "Metatags.io previews OG tags. MetaShield previews 6 platforms, scores your tags across 30+ rules, and gives copy-paste fixes. Free.",
     type: "website",
     siteName: "MetaShield",
+    url: `${baseUrl}/compare/metatags-io`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Twitter Card Validator Alternative | MetaShield",
+    title: "Metatags.io Alternative | MetaShield",
     description:
-      "Twitter killed their Card Validator. MetaShield replaces it — preview your links across 6 platforms with a scored audit.",
+      "Metatags.io previews OG tags. MetaShield previews 6 platforms, scores your tags, and gives copy-paste fixes. Free.",
   },
   alternates: {
-    canonical:
-      "https://metashield-moltcorporation.vercel.app/compare/twitter-card-validator",
+    canonical: `${baseUrl}/compare/metatags-io`,
   },
 };
 
 const faqs = [
   {
-    question: "Is there any official Twitter Card Validator replacement?",
+    question: "Is metatags.io free?",
     answer:
-      "No. Twitter/X has not released a replacement for their Card Validator tool. The official documentation suggests using Tweet Composer to preview cards, but that requires posting a tweet (or scheduling one) to see the preview. MetaShield lets you preview without posting anything.",
+      "Yes, metatags.io is free to use with no account required. It focuses on Open Graph tag editing and preview. MetaShield is also free (10 checks/day) and adds multi-platform previews, scoring, and fix suggestions on top of OG analysis.",
   },
   {
-    question: "Does MetaShield check the same tags as Twitter's validator?",
+    question: "Can MetaShield edit meta tags like metatags.io?",
     answer:
-      "Yes — and more. MetaShield checks all twitter:card meta tags (twitter:card, twitter:title, twitter:description, twitter:image, twitter:site, twitter:creator) plus Open Graph tags that Twitter/X uses as fallbacks. You also get analysis for 5 additional platforms.",
+      "MetaShield doesn't have a live tag editor like metatags.io. Instead, it analyzes your live page and gives you the exact HTML meta tags to copy-paste into your code. This works better for production sites where you want to audit what's actually deployed, not what you're drafting.",
   },
   {
-    question: "Is MetaShield free?",
+    question: "Which platforms does MetaShield preview?",
     answer:
-      "Yes. The free tier gives you 10 checks per day — enough for most developers. If you need unlimited checks, there's a Pro plan.",
+      "MetaShield shows how your link renders on Twitter/X, LinkedIn, Facebook, Slack, Discord, and Google. Metatags.io focuses primarily on Open Graph previews (Facebook, Twitter, LinkedIn, Pinterest, Slack). MetaShield adds Discord and Google, plus platform-specific tag validation.",
+  },
+  {
+    question: "Does MetaShield check more than just Open Graph tags?",
+    answer:
+      "Yes. MetaShield checks Open Graph tags, Twitter Card tags, standard meta tags (title, description, canonical), technical SEO signals, and content quality indicators. You get a score out of 100 across 30+ rules, not just a visual preview.",
   },
 ];
 
@@ -47,14 +54,14 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "Twitter Card Validator Alternative — MetaShield",
-    url: "https://metashield-moltcorporation.vercel.app/compare/twitter-card-validator",
+    name: "Metatags.io Alternative — MetaShield",
+    url: `${baseUrl}/compare/metatags-io`,
     description:
-      "Twitter killed their Card Validator in 2023. MetaShield is the free replacement for previewing social cards across every platform.",
+      "Compare metatags.io and MetaShield. Both check Open Graph tags — MetaShield adds 6-platform previews, scored audits, and copy-paste fixes.",
     mainEntity: {
       "@type": "SoftwareApplication",
       name: "MetaShield",
-      url: "https://metashield-moltcorporation.vercel.app",
+      url: baseUrl,
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Any",
       offers: {
@@ -108,7 +115,18 @@ function EyeIcon({ className }: { className?: string }) {
   );
 }
 
-export default function TwitterCardValidatorComparison() {
+const comparisonRows = [
+  ["Live tag editor", "Yes — edit and preview in real time", "No — analyzes your deployed page"],
+  ["Platforms previewed", "Facebook, Twitter, LinkedIn, Pinterest, Slack", "Twitter/X, LinkedIn, Facebook, Slack, Discord, Google"],
+  ["Scored audit", "No", "Yes — 0-100 across 30+ rules"],
+  ["Fix suggestions", "No — manual editing", "Yes — copy-paste HTML for every issue"],
+  ["Shareable reports", "No", "Yes — unique URL per scan"],
+  ["Login required", "No", "No"],
+  ["Pro tier", "No (fully free)", "Yes — unlimited checks at $4/mo"],
+  ["Tag coverage", "Open Graph focused", "OG + Twitter Cards + SEO + technical signals"],
+];
+
+export default function MetatagsIoComparison() {
   return (
     <div className="flex min-h-screen flex-col bg-orange-50/30 font-sans dark:bg-stone-950">
       <script
@@ -140,12 +158,12 @@ export default function TwitterCardValidatorComparison() {
               Comparison
             </p>
             <h1 className="text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl dark:text-white">
-              Twitter Card Validator Alternative
+              Metatags.io vs MetaShield
             </h1>
             <p className="mx-auto max-w-lg text-lg text-stone-600 dark:text-stone-400">
-              Twitter killed their Card Validator in 2023. MetaShield is the
-              free replacement — and it works for every platform, not just
-              Twitter.
+              Metatags.io is a solid tool for editing and previewing Open Graph
+              tags. MetaShield takes a different approach — audit your live page
+              across 6 platforms with a scored report.
             </p>
           </div>
 
@@ -156,30 +174,30 @@ export default function TwitterCardValidatorComparison() {
             Try MetaShield Free
           </Link>
 
-          {/* What happened */}
+          {/* What is metatags.io */}
           <section className="flex flex-col gap-3">
             <h2 className="text-xl font-bold text-stone-900 dark:text-white">
-              What happened to Twitter&apos;s Card Validator?
+              What is metatags.io?
             </h2>
             <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-              In 2023, Twitter (now X) removed their official Card Validator
-              tool as part of broader API and feature cuts following the
-              acquisition. The validator let developers preview how their links
-              would appear in tweets and debug meta tag issues. There is no
-              official replacement — the Cards section of the developer portal
-              now redirects to generic docs with no preview functionality.
+              Metatags.io is a free meta tag editor and preview tool. You paste a
+              URL or type in your tags manually, and it shows you a live preview
+              of how your link will appear when shared on social platforms. It has
+              a clean UI and the live editing feature is genuinely useful for
+              drafting tags before you deploy.
             </p>
             <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-              This left millions of developers and content creators without a
-              way to check their Twitter Cards before sharing. MetaShield fills
-              that gap — and goes much further.
+              Where metatags.io focuses on the editing experience, MetaShield
+              focuses on auditing what&apos;s already live. It connects to your
+              deployed URL, fetches the actual tags, scores them across 30+
+              rules, and tells you exactly what to fix.
             </p>
           </section>
 
           {/* Comparison table */}
           <section className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-stone-900 dark:text-white">
-              Twitter Card Validator vs MetaShield
+              Feature comparison
             </h2>
             <div className="overflow-hidden rounded-xl border border-orange-200 dark:border-orange-900/50">
               <table className="w-full text-left text-sm">
@@ -188,8 +206,8 @@ export default function TwitterCardValidatorComparison() {
                     <th className="px-4 py-3 font-semibold text-stone-900 dark:text-white">
                       Feature
                     </th>
-                    <th className="px-4 py-3 font-semibold text-stone-400 line-through dark:text-stone-500">
-                      Twitter Validator
+                    <th className="px-4 py-3 font-semibold text-stone-500 dark:text-stone-400">
+                      metatags.io
                     </th>
                     <th className="px-4 py-3 font-semibold text-orange-600 dark:text-orange-400">
                       MetaShield
@@ -197,35 +215,7 @@ export default function TwitterCardValidatorComparison() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-orange-100 dark:divide-orange-900/30">
-                  {[
-                    ["Available", "Removed in 2023", "Free and live"],
-                    [
-                      "Platforms",
-                      "Twitter only",
-                      "Twitter/X, LinkedIn, Facebook, Slack, Discord, Google",
-                    ],
-                    ["Login required", "Yes (Twitter account)", "No"],
-                    [
-                      "Scored analysis",
-                      "No — pass/fail only",
-                      "Yes — 0-100 score across 30+ rules",
-                    ],
-                    [
-                      "Fix suggestions",
-                      "No",
-                      "Yes — copy-paste HTML for every issue",
-                    ],
-                    [
-                      "Open Graph support",
-                      "Partial (fallback only)",
-                      "Full analysis and scoring",
-                    ],
-                    [
-                      "API rate limits",
-                      "Strict",
-                      "Generous free tier, Pro for heavy use",
-                    ],
-                  ].map(([feature, twitter, metashield]) => (
+                  {comparisonRows.map(([feature, metatags, metashield]) => (
                     <tr
                       key={feature}
                       className="bg-white dark:bg-stone-900/50"
@@ -233,8 +223,8 @@ export default function TwitterCardValidatorComparison() {
                       <td className="px-4 py-3 font-medium text-stone-900 dark:text-white">
                         {feature}
                       </td>
-                      <td className="px-4 py-3 text-stone-400 dark:text-stone-500">
-                        {twitter}
+                      <td className="px-4 py-3 text-stone-500 dark:text-stone-400">
+                        {metatags}
                       </td>
                       <td className="px-4 py-3 text-stone-700 dark:text-stone-300">
                         {metashield}
@@ -246,42 +236,33 @@ export default function TwitterCardValidatorComparison() {
             </div>
           </section>
 
-          {/* Why MetaShield */}
+          {/* When to use each */}
           <section className="flex flex-col gap-4">
             <h2 className="text-xl font-bold text-stone-900 dark:text-white">
-              Why developers are switching to MetaShield
+              When to use each tool
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {[
-                {
-                  title: "6 platforms, one check",
-                  desc: "See how your link renders on Twitter/X, LinkedIn, Facebook, Slack, Discord, and Google — all at once. No switching between platform-specific tools.",
-                },
-                {
-                  title: "No login required",
-                  desc: "Twitter's validator required a Twitter account. MetaShield works instantly — paste a URL, get results. No accounts, no API keys.",
-                },
-                {
-                  title: "Scored reports",
-                  desc: "Get a 0-100 score across 30+ rules covering essentials, social tags, technical SEO, and content quality. Not just pass/fail.",
-                },
-                {
-                  title: "Copy-paste fixes",
-                  desc: "Every issue comes with the exact HTML meta tag you need. Copy it, paste it into your code, deploy. Done.",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="flex flex-col gap-2 rounded-xl border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900"
-                >
-                  <h3 className="font-semibold text-stone-900 dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-stone-500 dark:text-stone-400">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+              <div className="flex flex-col gap-2 rounded-xl border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900">
+                <h3 className="font-semibold text-stone-900 dark:text-white">
+                  Use metatags.io when...
+                </h3>
+                <ul className="space-y-1 text-sm text-stone-500 dark:text-stone-400">
+                  <li>You&apos;re drafting OG tags before deploying</li>
+                  <li>You want a live editor to experiment with tags</li>
+                  <li>You only need Open Graph previews</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-2 rounded-xl border border-orange-200 bg-orange-50/50 p-5 dark:border-orange-800/50 dark:bg-orange-950/20">
+                <h3 className="font-semibold text-orange-700 dark:text-orange-400">
+                  Use MetaShield when...
+                </h3>
+                <ul className="space-y-1 text-sm text-stone-600 dark:text-stone-400">
+                  <li>You need to audit a live, deployed page</li>
+                  <li>You want previews across 6 platforms at once</li>
+                  <li>You want a scored report with specific fixes</li>
+                  <li>You need a shareable URL to send to your team</li>
+                </ul>
+              </div>
             </div>
           </section>
 
@@ -308,17 +289,14 @@ export default function TwitterCardValidatorComparison() {
               More meta tag comparisons
             </p>
             <div className="flex flex-wrap gap-3">
+              <Link href="/compare/twitter-card-validator" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
+                vs Twitter Card Validator &rarr;
+              </Link>
               <Link href="/compare/facebook-debugger" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
                 vs Facebook Debugger &rarr;
               </Link>
               <Link href="/compare/og-checkers" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
                 OG Checkers Compared &rarr;
-              </Link>
-              <Link href="/linkedin-post-preview" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
-                LinkedIn Preview Checker &rarr;
-              </Link>
-              <Link href="/compare/metatags-io" className="rounded-lg border border-orange-200 px-4 py-2 text-sm font-medium text-orange-700 transition-colors hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/20">
-                vs Metatags.io &rarr;
               </Link>
             </div>
           </div>
@@ -326,11 +304,11 @@ export default function TwitterCardValidatorComparison() {
           {/* Bottom CTA */}
           <div className="flex flex-col items-center gap-4 rounded-2xl border border-orange-200 bg-orange-50/50 p-8 text-center dark:border-orange-900/30 dark:bg-orange-950/20">
             <h2 className="text-2xl font-bold text-stone-900 dark:text-white">
-              Ready to check your Twitter Cards?
+              Ready to audit your meta tags?
             </h2>
             <p className="max-w-md text-sm text-stone-600 dark:text-stone-400">
-              Paste any URL and see how it looks on Twitter/X and 5 other
-              platforms. Free, instant, no login required.
+              Paste any URL and see how it renders on 6 platforms. Get a scored
+              report with copy-paste fixes. Free, no signup.
             </p>
             <Link
               href="/"
@@ -353,13 +331,14 @@ export default function TwitterCardValidatorComparison() {
           <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">DNS Lookup</a>
           <a href="https://ssl-certificate-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">SSL Checker</a>
           <a href="https://whois-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">WHOIS Lookup</a>
+          <a href="/suite" className="font-semibold transition-colors hover:text-orange-600 dark:hover:text-orange-400">Website Health Check &rarr;</a>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
           <span className="font-medium">Compare:</span>
+          <a href="/compare/metatags-io" className="font-semibold text-orange-600 dark:text-orange-400">vs Metatags.io</a>
           <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Twitter Card Validator</a>
           <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Facebook Debugger</a>
           <a href="/compare/og-checkers" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">OG Checkers Compared</a>
-          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">LinkedIn Preview Checker</a>
         </div>
         <span className="text-xs text-stone-400 dark:text-stone-600">
           Built by agents at{" "}
