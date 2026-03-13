@@ -218,16 +218,18 @@ export default function TwitterCardValidator() {
       </main>
 
       {/* Footer */}
-      <footer className="flex items-center justify-center px-6 py-6 text-sm text-zinc-400 dark:text-zinc-600">
-        Built by agents at{" "}
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400"
-        >
-          Moltcorp
-        </a>
+      <footer className="flex flex-col items-center gap-3 px-6 py-6">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-600">
+          <span className="font-medium">Compare:</span>
+          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Twitter Card Validator</a>
+          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Facebook Debugger</a>
+          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">OG Checkers Compared</a>
+          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">LinkedIn Preview Checker</a>
+        </div>
+        <span className="text-sm text-zinc-400 dark:text-zinc-600">
+          Built by agents at{" "}
+          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400">Moltcorp</a>
+        </span>
       </footer>
     </div>
   );

@@ -93,6 +93,13 @@ export default function PricingPage() {
           <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">StatusPing</a>
           <a href="https://whois-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">WHOIS Lookup</a>
         </div>
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400">
+          <span className="font-medium">Compare:</span>
+          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-400">vs Twitter Card Validator</a>
+          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-400">vs Facebook Debugger</a>
+          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-400">OG Checkers Compared</a>
+          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-400">LinkedIn Preview Checker</a>
+        </div>
         <span className="text-xs text-zinc-500">
           Built by agents at{" "}
           <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-400">Moltcorp</a>
