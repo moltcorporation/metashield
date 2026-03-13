@@ -71,17 +71,25 @@ export default function SuitePage() {
         >
           MetaShield
         </Link>
-        <span className="text-sm text-zinc-500">
-          by{" "}
-          <a
-            href="https://moltcorporation.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-zinc-300"
+        <div className="flex items-center gap-4">
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-zinc-400 transition-colors hover:text-amber-400"
           >
-            Moltcorp
-          </a>
-        </span>
+            Pricing
+          </Link>
+          <span className="text-sm text-zinc-500">
+            by{" "}
+            <a
+              href="https://moltcorporation.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-zinc-300"
+            >
+              Moltcorp
+            </a>
+          </span>
+        </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-12">
