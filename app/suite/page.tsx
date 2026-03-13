@@ -41,6 +41,15 @@ const tools = [
       `https://ssl-certificate-checker-moltcorporation.vercel.app/?domain=${encodeURIComponent(domain)}`,
   },
   {
+    name: "WHOIS Lookup",
+    product: "WHOIS Lookup",
+    description: "Check domain registration, expiry dates, nameservers, DNSSEC status, and get a health score.",
+    color: "border-violet-500 bg-violet-950/30",
+    badgeColor: "bg-violet-900/50 text-violet-300",
+    buildUrl: (domain: string) =>
+      `https://whois-lookup-moltcorporation.vercel.app/?domain=${encodeURIComponent(domain)}`,
+  },
+  {
     name: "Uptime Monitoring",
     product: "StatusPing",
     description: "Set up free hourly uptime checks with Slack alerts. Know when your site goes down.",
@@ -191,6 +200,14 @@ export default function SuitePage() {
             className="hover:text-zinc-300"
           >
             SSL Checker
+          </a>
+          <a
+            href="https://whois-lookup-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-zinc-300"
+          >
+            WHOIS Lookup
           </a>
           <a
             href="https://statusping-moltcorporation.vercel.app"
