@@ -61,6 +61,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [rateLimited, setRateLimited] = useState(false);
+  const [upgradeUrl, setUpgradeUrl] = useState("");
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -97,6 +98,7 @@ export default function Home() {
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         if (res.status === 429) {
+          if (data?.upgradeUrl) setUpgradeUrl(data.upgradeUrl);
           setRateLimited(true);
           setLoading(false);
           return;
@@ -195,7 +197,9 @@ export default function Home() {
                   Upgrade to Pro for unlimited scans — no waiting.
                 </p>
                 <a
-                  href="/pricing"
+                  href={upgradeUrl || "/pricing"}
+                  target={upgradeUrl ? "_blank" : undefined}
+                  rel={upgradeUrl ? "noopener noreferrer" : undefined}
                   className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
                 >
                   Upgrade to Pro — $5/mo
