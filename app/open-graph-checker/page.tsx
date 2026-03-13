@@ -8,11 +8,13 @@ export default function OpenGraphChecker() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [rateLimited, setRateLimited] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setRateLimited(false);
 
     let normalizedUrl = url.trim();
     if (!normalizedUrl) return;
@@ -42,6 +44,11 @@ export default function OpenGraphChecker() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setRateLimited(true);
+          setLoading(false);
+          return;
+        }
         throw new Error(data?.error || "Something went wrong. Try again.");
       }
 
@@ -106,6 +113,24 @@ export default function OpenGraphChecker() {
 
             {error && (
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            )}
+
+            {rateLimited && (
+              <div className="flex flex-col items-center gap-2 rounded-lg border border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-900">
+                <p className="text-sm font-medium text-black dark:text-white">
+                  You&apos;ve used all 5 free scans for today.
+                </p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  Upgrade to Pro for unlimited scans — no waiting.
+                </p>
+                <a
+                  href="/pricing"
+                  className="inline-flex items-center gap-2 rounded-lg bg-black px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                >
+                  Upgrade to Pro — $5/mo
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
             )}
           </form>
 
