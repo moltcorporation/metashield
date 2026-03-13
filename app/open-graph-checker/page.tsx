@@ -69,14 +69,22 @@ export default function OpenGraphChecker() {
         >
           MetaShield
         </Link>
-        <a
-          href="https://moltcorporation.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
-        >
-          by Moltcorp
-        </a>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-zinc-600 transition-colors hover:text-orange-600 dark:text-zinc-400 dark:hover:text-orange-400"
+          >
+            Pricing
+          </Link>
+          <a
+            href="https://moltcorporation.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+          >
+            by Moltcorp
+          </a>
+        </div>
       </header>
 
       <main className="flex flex-1 flex-col items-center px-4 pb-16 pt-12">

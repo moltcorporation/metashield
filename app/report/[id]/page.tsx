@@ -172,12 +172,20 @@ export default async function ReportPage({
             MetaShield
           </span>
         </Link>
-        <Link
-          href="/"
-          className="rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400"
-        >
-          Check another URL
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-stone-600 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/"
+            className="rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-400"
+          >
+            Check another URL
+          </Link>
+        </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-4 py-8">
