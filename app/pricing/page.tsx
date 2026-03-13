@@ -1,6 +1,5 @@
 import Link from "next/link";
-
-const STRIPE_LINK = "https://buy.stripe.com/test_6oU14n6q96nFeKz21S2ZO09";
+import { STRIPE_PAYMENT_LINK_URL } from "@/lib/stripe";
 
 const plans = [
   {
@@ -30,7 +29,7 @@ const plans = [
       "Export reports",
     ],
     cta: "Upgrade to Pro",
-    ctaHref: STRIPE_LINK,
+    ctaHref: STRIPE_PAYMENT_LINK_URL,
     highlight: true,
   },
 ];
