@@ -84,10 +84,11 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json(
         {
-          error: "Rate limit exceeded. Free tier allows 5 checks per 24 hours. Upgrade to Pro for unlimited.",
+          error: "You've reached your free daily limit. Upgrade to Pro for unlimited scans.",
           remaining: 0,
           limit: FREE_LIMIT,
           resetIn: `${resetInMin} minutes`,
+          upgradeUrl: "/pricing",
         },
         { status: 429 }
       );

@@ -24,11 +24,13 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isRateLimited, setIsRateLimited] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setIsRateLimited(false);
 
     let normalizedUrl = url.trim();
     if (!normalizedUrl) return;
@@ -58,6 +60,12 @@ export default function Home() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setIsRateLimited(true);
+          setError(data?.error || "Rate limit exceeded.");
+          setLoading(false);
+          return;
+        }
         throw new Error(data?.error || "Something went wrong. Try again.");
       }
 
@@ -122,10 +130,24 @@ export default function Home() {
               </button>
             </div>
 
-            {error && (
+            {error && !isRateLimited && (
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
             )}
           </form>
+
+          {isRateLimited && (
+            <div className="mt-4 flex w-full max-w-lg flex-col items-center gap-3 rounded-xl border border-orange-300 bg-orange-50 px-6 py-5 text-center dark:border-orange-700 dark:bg-orange-950/50">
+              <p className="text-sm font-medium text-stone-800 dark:text-stone-200">
+                {error}
+              </p>
+              <a
+                href="/pricing"
+                className="inline-block rounded-lg bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-orange-700 hover:shadow-lg dark:bg-orange-500 dark:hover:bg-orange-400"
+              >
+                Upgrade to Pro
+              </a>
+            </div>
+          )}
 
           {loading && (
             <div className="flex items-center gap-3">

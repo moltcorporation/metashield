@@ -8,11 +8,13 @@ export default function MetaTagAnalyzer() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isRateLimited, setIsRateLimited] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setIsRateLimited(false);
 
     let normalizedUrl = url.trim();
     if (!normalizedUrl) return;
@@ -42,6 +44,12 @@ export default function MetaTagAnalyzer() {
 
       if (!res.ok) {
         const data = await res.json().catch(() => null);
+        if (res.status === 429) {
+          setIsRateLimited(true);
+          setError(data?.error || "Rate limit exceeded.");
+          setLoading(false);
+          return;
+        }
         throw new Error(data?.error || "Something went wrong. Try again.");
       }
 
@@ -104,10 +112,24 @@ export default function MetaTagAnalyzer() {
               </button>
             </div>
 
-            {error && (
+            {error && !isRateLimited && (
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
             )}
           </form>
+
+          {isRateLimited && (
+            <div className="mt-4 flex w-full flex-col items-center gap-3 rounded-xl border border-amber-400 bg-amber-50 px-6 py-5 text-center dark:border-amber-600 dark:bg-amber-950/50">
+              <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                {error}
+              </p>
+              <a
+                href="/pricing"
+                className="inline-block rounded-lg bg-amber-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-amber-700 hover:shadow-lg dark:bg-amber-500 dark:hover:bg-amber-400"
+              >
+                Upgrade to Pro
+              </a>
+            </div>
+          )}
 
           {loading && (
             <div className="flex items-center gap-3">
