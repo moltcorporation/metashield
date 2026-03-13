@@ -3,13 +3,13 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    "Best Open Graph Checkers in 2026: 7 Tools Compared | MetaShield",
+    "Best Open Graph Checkers in 2026: 8 Tools Compared | MetaShield",
   description:
-    "Compare the top 7 Open Graph checker tools side by side. See features, pricing, and which OG tag checker is best for developers, marketers, and content teams.",
+    "Compare the top 8 Open Graph checker tools side by side. See features, pricing, and which OG tag checker is best for developers, marketers, and content teams.",
   openGraph: {
     title: "Best Open Graph Checkers in 2026 | MetaShield",
     description:
-      "Compare 7 OG checkers side by side — features, pricing, platforms covered. Find the best tool for your workflow.",
+      "Compare 8 OG checkers side by side — features, pricing, platforms covered. Find the best tool for your workflow.",
     type: "website",
     siteName: "MetaShield",
   },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best Open Graph Checkers in 2026 | MetaShield",
     description:
-      "7 OG tag checkers compared — features, pricing, platforms. Find the best one.",
+      "8 OG tag checkers compared — features, pricing, platforms. Find the best one.",
   },
   alternates: {
     canonical:
@@ -25,14 +25,51 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Best Open Graph Checkers in 2026: 7 Tools Compared",
-  url: "https://metashield-moltcorporation.vercel.app/compare/og-checkers",
-  description:
-    "Compare the top 7 Open Graph checker tools side by side. Features, pricing, and recommendations.",
-};
+const faqs = [
+  {
+    question: "What is an Open Graph checker?",
+    answer:
+      "An Open Graph checker fetches a URL and reads its og:title, og:description, og:image, and other meta tags to show you how the page will appear when shared on social platforms like Twitter/X, LinkedIn, Facebook, and Slack.",
+  },
+  {
+    question: "Which OG checker shows the most platforms?",
+    answer:
+      "MetaShield shows previews for 6 platforms (Twitter/X, LinkedIn, Facebook, Slack, Discord, and Google). OpenGraph.to covers 5 platforms including WhatsApp. Most other tools cover 3-4 platforms.",
+  },
+  {
+    question: "Do I need to pay for an OG checker?",
+    answer:
+      "Most OG checkers are free for basic use. MetaShield offers 5 free scans per day with a Pro tier for unlimited use. OpenGraph.xyz and metatags.io are fully free. The main paid tools (OpenGraph.io, Iframely) charge for API access, not the visual checker.",
+  },
+  {
+    question: "Can an OG checker fix my tags for me?",
+    answer:
+      "MetaShield and OpenGraph.to provide fix suggestions — MetaShield gives copy-paste HTML snippets for every issue found. Most other tools only show what tags exist without suggesting improvements.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Best Open Graph Checkers in 2026: 8 Tools Compared",
+    url: "https://metashield-moltcorporation.vercel.app/compare/og-checkers",
+    description:
+      "Compare the top 8 Open Graph checker tools side by side. Features, pricing, and recommendations.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
 
 function EyeIcon({ className }: { className?: string }) {
   return (
@@ -127,6 +164,16 @@ const tools = [
     pricing: "Free debugger, paid API",
   },
   {
+    name: "Social Share Preview",
+    url: "https://socialsharepreview.com",
+    platforms: 3,
+    scoring: false,
+    fixes: false,
+    login: false,
+    api: false,
+    pricing: "Free",
+  },
+  {
     name: "Facebook Debugger",
     url: "https://developers.facebook.com/tools/debug/",
     platforms: 1,
@@ -173,7 +220,7 @@ export default function OGCheckersComparison() {
               Best Open Graph Checkers in 2026
             </h1>
             <p className="mx-auto max-w-lg text-lg text-stone-600 dark:text-stone-400">
-              7 tools compared side by side. Which OG tag checker is right for
+              8 tools compared side by side. Which OG tag checker is right for
               you?
             </p>
           </div>
@@ -373,7 +420,20 @@ export default function OGCheckersComparison() {
 
             <div className="flex flex-col gap-3 rounded-xl border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
               <h3 className="font-semibold text-stone-900 dark:text-white">
-                7. Facebook Sharing Debugger
+                7. Social Share Preview
+              </h3>
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                Simple, focused tool that shows how your URL will appear on
+                Facebook, Twitter, and LinkedIn. Clean interface with no
+                extra features — just the preview. Doesn&apos;t score tags
+                or suggest fixes, but good for a quick visual check if you
+                only care about the big three platforms.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 rounded-xl border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900">
+              <h3 className="font-semibold text-stone-900 dark:text-white">
+                8. Facebook Sharing Debugger
               </h3>
               <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 Facebook&apos;s official tool. Shows how your links render in
@@ -382,6 +442,28 @@ export default function OGCheckersComparison() {
                 other platforms. Useful for Facebook-specific cache busting, but
                 limited for general OG tag auditing.
               </p>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="flex flex-col gap-4">
+            <h2 className="text-xl font-bold text-stone-900 dark:text-white">
+              Frequently asked questions
+            </h2>
+            <div className="flex flex-col gap-4">
+              {faqs.map((faq, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col gap-2 rounded-lg border border-orange-100 bg-white p-5 dark:border-orange-900/30 dark:bg-stone-900"
+                >
+                  <h3 className="font-semibold text-stone-900 dark:text-white">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -474,6 +556,30 @@ export default function OGCheckersComparison() {
             className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
           >
             StatusPing
+          </a>
+          <a
+            href="https://dns-lookup-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
+          >
+            DNS Lookup
+          </a>
+          <a
+            href="https://ssl-certificate-checker-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
+          >
+            SSL Checker
+          </a>
+          <a
+            href="https://whois-lookup-moltcorporation.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
+          >
+            WHOIS Lookup
           </a>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
