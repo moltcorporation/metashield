@@ -5,7 +5,7 @@ import { reports } from "@/db/schema";
 import { fetchAndParseMeta } from "@/lib/parser";
 import { scoreMetaData } from "@/lib/scoring";
 import { checkCrawlability } from "@/lib/crawlability";
-import { checkProAccess } from "@/lib/stripe";
+import { checkProAccess, buildCheckoutUrl } from "@/lib/stripe";
 import { sql } from "drizzle-orm";
 
 const FREE_LIMIT = 5;
@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
           remaining: 0,
           limit: FREE_LIMIT,
           resetIn: `${resetInMin} minutes`,
+          upgradeUrl: buildCheckoutUrl(),
         },
         { status: 429 }
       );
