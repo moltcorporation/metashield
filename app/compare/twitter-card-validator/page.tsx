@@ -25,26 +25,58 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Twitter Card Validator Alternative — MetaShield",
-  url: "https://metashield-moltcorporation.vercel.app/compare/twitter-card-validator",
-  description:
-    "Twitter killed their Card Validator in 2023. MetaShield is the free replacement for previewing social cards across every platform.",
-  mainEntity: {
-    "@type": "SoftwareApplication",
-    name: "MetaShield",
-    url: "https://metashield-moltcorporation.vercel.app",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Any",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
+const faqs = [
+  {
+    question: "Is there any official Twitter Card Validator replacement?",
+    answer:
+      "No. Twitter/X has not released a replacement for their Card Validator tool. The official documentation suggests using Tweet Composer to preview cards, but that requires posting a tweet (or scheduling one) to see the preview. MetaShield lets you preview without posting anything.",
+  },
+  {
+    question: "Does MetaShield check the same tags as Twitter's validator?",
+    answer:
+      "Yes — and more. MetaShield checks all twitter:card meta tags (twitter:card, twitter:title, twitter:description, twitter:image, twitter:site, twitter:creator) plus Open Graph tags that Twitter/X uses as fallbacks. You also get analysis for 5 additional platforms.",
+  },
+  {
+    question: "Is MetaShield free?",
+    answer:
+      "Yes. The free tier gives you 10 checks per day — enough for most developers. If you need unlimited checks, there's a Pro plan.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Twitter Card Validator Alternative — MetaShield",
+    url: "https://metashield-moltcorporation.vercel.app/compare/twitter-card-validator",
+    description:
+      "Twitter killed their Card Validator in 2023. MetaShield is the free replacement for previewing social cards across every platform.",
+    mainEntity: {
+      "@type": "SoftwareApplication",
+      name: "MetaShield",
+      url: "https://metashield-moltcorporation.vercel.app",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
     },
   },
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  },
+];
 
 function EyeIcon({ className }: { className?: string }) {
   return (
@@ -256,45 +288,18 @@ export default function TwitterCardValidatorComparison() {
           {/* FAQ */}
           <section className="flex flex-col gap-6">
             <h2 className="text-xl font-bold text-stone-900 dark:text-white">
-              FAQ
+              Frequently Asked Questions
             </h2>
-
-            <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-stone-900 dark:text-white">
-                Is there any official Twitter Card Validator replacement?
-              </h3>
-              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                No. Twitter/X has not released a replacement for their Card
-                Validator tool. The official documentation suggests using Tweet
-                Composer to preview cards, but that requires posting a tweet
-                (or scheduling one) to see the preview. MetaShield lets you
-                preview without posting anything.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-stone-900 dark:text-white">
-                Does MetaShield check the same tags as Twitter&apos;s validator?
-              </h3>
-              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                Yes — and more. MetaShield checks all twitter:card meta tags
-                (twitter:card, twitter:title, twitter:description,
-                twitter:image, twitter:site, twitter:creator) plus Open Graph
-                tags that Twitter/X uses as fallbacks. You also get analysis for
-                5 additional platforms.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <h3 className="font-semibold text-stone-900 dark:text-white">
-                Is MetaShield free?
-              </h3>
-              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                Yes. The free tier gives you 10 checks per day — enough for most
-                developers. If you need unlimited checks, there&apos;s a Pro
-                plan.
-              </p>
-            </div>
+            {faqs.map((faq, i) => (
+              <div key={i} className="flex flex-col gap-3">
+                <h3 className="font-semibold text-stone-900 dark:text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
           </section>
 
           {/* Bottom CTA */}
@@ -322,22 +327,11 @@ export default function TwitterCardValidatorComparison() {
           <span className="font-semibold text-orange-600 dark:text-orange-400">
             MetaShield
           </span>
-          <a
-            href="https://headerguard-moltcorporation.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
-          >
-            HeaderGuard
-          </a>
-          <a
-            href="https://statusping-moltcorporation.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-orange-600 dark:hover:text-orange-400"
-          >
-            StatusPing
-          </a>
+          <a href="https://headerguard-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">HeaderGuard</a>
+          <a href="https://statusping-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">StatusPing</a>
+          <a href="https://dns-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">DNS Lookup</a>
+          <a href="https://ssl-certificate-checker-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">SSL Checker</a>
+          <a href="https://whois-lookup-moltcorporation.vercel.app" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">WHOIS Lookup</a>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
           <span className="font-medium">Compare:</span>
