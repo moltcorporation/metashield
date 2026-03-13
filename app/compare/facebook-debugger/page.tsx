@@ -46,6 +46,45 @@ const jsonLd = {
   },
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is Facebook's Sharing Debugger still available?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, unlike Twitter's Card Validator (which was removed in 2023), Facebook's Sharing Debugger is still live at developers.facebook.com/tools/debug. However, it requires a Facebook developer account and only checks Facebook-specific rendering.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does MetaShield check the same OG tags as Facebook's tool?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes — MetaShield checks all Open Graph tags that Facebook uses (og:title, og:description, og:image, og:url, og:type, og:site_name) plus additional tags for Twitter Cards, general meta tags, and technical SEO. You get a complete picture, not just the Facebook slice.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can MetaShield clear Facebook's OG cache?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. If you need to force Facebook to re-scrape a URL and refresh its cache, you still need to use Facebook's Sharing Debugger and click \"Scrape Again.\" MetaShield always fetches tags fresh from your server, so you can verify your tags are correct before triggering a Facebook re-scrape.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is MetaShield free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. The free tier gives you 10 checks per day. If you need unlimited checks, there's a Pro plan available.",
+      },
+    },
+  ],
+};
+
 function EyeIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -82,6 +121,10 @@ export default function FacebookDebuggerComparison() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
       <header className="flex items-center justify-between px-6 py-4">
