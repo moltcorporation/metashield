@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const STRIPE_LINK = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK || "#";
+const STRIPE_LINK = "https://buy.stripe.com/test_6oU14n6q96nFeKz21S2ZO09";
 
 const plans = [
   {
