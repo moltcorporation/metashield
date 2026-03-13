@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const STRIPE_LINK = "https://buy.stripe.com/test_6oU14n6q96nFeKz21S2ZO09";
-
 function EyeIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
@@ -197,7 +195,7 @@ export default function Home() {
                   Upgrade to Pro for unlimited scans — no waiting.
                 </p>
                 <a
-                  href={STRIPE_LINK}
+                  href="/pricing"
                   className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
                 >
                   Upgrade to Pro — $5/mo
