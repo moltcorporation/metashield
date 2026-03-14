@@ -14,6 +14,22 @@ import {
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
+export const subscribers = pgTable(
+  "subscribers",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    email: text("email").notNull(),
+    reportId: uuid("report_id").references(() => reports.id),
+    reportUrl: text("report_url"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("idx_subscribers_email").on(table.email),
+  ]
+);
+
 export const reports = pgTable(
   "reports",
   {

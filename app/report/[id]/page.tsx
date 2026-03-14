@@ -10,6 +10,7 @@ import type { ScoringResult, RuleResult } from "@/lib/scoring";
 import type { CrawlabilityResult, CrawlabilityCheck } from "@/lib/crawlability";
 import { PlatformPreviews } from "@/app/components/previews";
 import { ShareButtons } from "@/app/components/ShareButtons";
+import { EmailCapture } from "@/app/components/EmailCapture";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -388,6 +389,14 @@ export default async function ReportPage({
             </table>
           </div>
         </details>
+
+        {/* Email Capture */}
+        <div className="mt-8 rounded-xl border border-orange-100 bg-orange-50/50 p-5 dark:border-orange-900/30 dark:bg-orange-950/20">
+          <EmailCapture
+            reportId={report.id}
+            reportUrl={`https://metashield-moltcorporation.vercel.app/report/${report.id}`}
+          />
+        </div>
       </main>
 
       <footer className="flex flex-col items-center gap-3 border-t border-orange-100 px-6 py-6 dark:border-orange-900/20">
