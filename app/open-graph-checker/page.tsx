@@ -61,18 +61,18 @@ export default function OpenGraphChecker() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen flex-col bg-orange-50/30 font-sans dark:bg-stone-950">
       <header className="flex items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-black dark:text-white"
+          className="text-lg font-bold tracking-tight text-stone-900 dark:text-white"
         >
           MetaShield
         </Link>
         <div className="flex items-center gap-4">
           <Link
             href="/pricing"
-            className="text-sm font-medium text-zinc-600 transition-colors hover:text-orange-600 dark:text-zinc-400 dark:hover:text-orange-400"
+            className="text-sm font-medium text-stone-600 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
           >
             Pricing
           </Link>
@@ -80,7 +80,7 @@ export default function OpenGraphChecker() {
             href="https://moltcorporation.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
           >
             by Moltcorp
           </a>
@@ -89,10 +89,11 @@ export default function OpenGraphChecker() {
 
       <main className="flex flex-1 flex-col items-center px-4 pb-16 pt-12">
         <div className="flex w-full max-w-xl flex-col items-center gap-6 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white">
-            Open Graph Checker
+          <h1 className="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl dark:text-white">
+            Open Graph
+            <span className="block text-orange-600 dark:text-orange-400">Checker</span>
           </h1>
-          <p className="max-w-md text-lg text-zinc-500 dark:text-zinc-400">
+          <p className="max-w-md text-lg text-stone-600 dark:text-stone-400">
             Check your Open Graph tags and see how your links appear on
             Facebook, LinkedIn, Slack, Discord, and more.
           </p>
@@ -108,12 +109,12 @@ export default function OpenGraphChecker() {
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://your-site.com"
                 disabled={loading}
-                className="flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-3 text-base text-black placeholder-zinc-400 outline-none transition-colors focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:placeholder-zinc-600 dark:focus:border-zinc-500 dark:focus:ring-zinc-800"
+                className="flex-1 rounded-xl border border-orange-200 bg-white px-4 py-3.5 text-base text-stone-900 placeholder-stone-400 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-100 disabled:opacity-50 dark:border-orange-800 dark:bg-stone-800 dark:text-white dark:placeholder-stone-500 dark:focus:border-orange-500 dark:focus:ring-orange-900/50"
               />
               <button
                 type="submit"
                 disabled={loading || !url.trim()}
-                className="rounded-lg bg-black px-6 py-3 text-base font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                className="rounded-xl bg-orange-600 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 disabled:opacity-50 disabled:shadow-none dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
               >
                 {loading ? "Checking..." : "Check"}
               </button>
@@ -124,16 +125,16 @@ export default function OpenGraphChecker() {
             )}
 
             {rateLimited && (
-              <div className="flex flex-col items-center gap-2 rounded-lg border border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-900">
-                <p className="text-sm font-medium text-black dark:text-white">
+              <div className="flex flex-col items-center gap-2 rounded-xl border border-orange-300 bg-orange-50 p-4 dark:border-orange-700 dark:bg-orange-950/40">
+                <p className="text-sm font-medium text-stone-900 dark:text-white">
                   You&apos;ve used all 5 free scans for today.
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs text-stone-600 dark:text-stone-400">
                   Upgrade to Pro for unlimited scans — no waiting.
                 </p>
                 <a
                   href="/pricing"
-                  className="inline-flex items-center gap-2 rounded-lg bg-black px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                  className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
                 >
                   Upgrade to Pro — $5/mo
                   <span aria-hidden="true">&rarr;</span>
@@ -144,8 +145,8 @@ export default function OpenGraphChecker() {
 
           {loading && (
             <div className="flex items-center gap-3">
-              <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-300 border-t-black dark:border-zinc-600 dark:border-t-white" />
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-orange-200 border-t-orange-600 dark:border-orange-800 dark:border-t-orange-400" />
+              <p className="text-sm text-stone-500 dark:text-stone-400">
                 Analyzing Open Graph tags...
               </p>
             </div>
@@ -155,10 +156,10 @@ export default function OpenGraphChecker() {
         {!loading && (
           <div className="mt-16 flex w-full max-w-2xl flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What are Open Graph tags?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 Open Graph (OG) tags are meta tags that control how your links
                 appear when shared on social platforms. Originally created by
                 Facebook, they are now used by LinkedIn, Slack, Discord,
@@ -170,10 +171,10 @@ export default function OpenGraphChecker() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 Why check your Open Graph tags?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 Broken or missing OG tags mean your links look bare when shared
                 — no image, wrong title, or a generic description. This hurts
                 click-through rates and makes your content look unprofessional.
@@ -185,10 +186,10 @@ export default function OpenGraphChecker() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What does MetaShield check?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 MetaShield validates all Open Graph tags including og:title,
                 og:description, og:image, og:type, og:url, and og:site_name. It
                 also checks Twitter Card tags, basic SEO meta tags (title,
@@ -200,10 +201,10 @@ export default function OpenGraphChecker() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What is the ideal og:image size?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 The recommended og:image size is <strong>1200 x 630 pixels</strong>{" "}
                 with a 1.91:1 aspect ratio. This size works well across
                 Facebook, LinkedIn, Slack, and Discord. Images smaller than
@@ -216,17 +217,17 @@ export default function OpenGraphChecker() {
         )}
       </main>
 
-      <footer className="flex flex-col items-center gap-3 px-6 py-6">
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-600">
+      <footer className="flex flex-col items-center gap-3 border-t border-orange-100 px-6 py-6 dark:border-orange-900/30">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
           <span className="font-medium">Compare:</span>
-          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Twitter Card Validator</a>
-          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Facebook Debugger</a>
-          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">OG Checkers Compared</a>
-          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">LinkedIn Preview Checker</a>
+          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Twitter Card Validator</a>
+          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Facebook Debugger</a>
+          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">OG Checkers Compared</a>
+          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">LinkedIn Preview Checker</a>
         </div>
-        <span className="text-sm text-zinc-400 dark:text-zinc-600">
+        <span className="text-sm text-stone-400 dark:text-stone-600">
           Built by agents at{" "}
-          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400">Moltcorp</a>
+          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="ml-1 transition-colors hover:text-orange-600 dark:hover:text-orange-400">Moltcorp</a>
         </span>
       </footer>
     </div>
