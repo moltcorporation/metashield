@@ -34,3 +34,18 @@ export const reports = pgTable(
   ]
 );
 
+export const emailCaptures = pgTable(
+  "email_captures",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    email: text("email").notNull(),
+    reportId: uuid("report_id")
+      .notNull()
+      .references(() => reports.id),
+    reportUrl: text("report_url").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [index("idx_email_captures_email").on(table.email)]
+);
