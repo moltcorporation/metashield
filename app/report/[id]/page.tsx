@@ -10,6 +10,7 @@ import type { ScoringResult, RuleResult } from "@/lib/scoring";
 import type { CrawlabilityResult, CrawlabilityCheck } from "@/lib/crawlability";
 import { PlatformPreviews } from "@/app/components/previews";
 import { ShareButtons } from "@/app/components/ShareButtons";
+import { EmailCapture } from "@/app/components/EmailCapture";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -221,6 +222,12 @@ export default async function ReportPage({
         {/* Share */}
         <ShareButtons
           score={report.score}
+          reportUrl={`https://metashield-moltcorporation.vercel.app/report/${id}`}
+        />
+
+        {/* Email Capture */}
+        <EmailCapture
+          reportId={id}
           reportUrl={`https://metashield-moltcorporation.vercel.app/report/${id}`}
         />
 
