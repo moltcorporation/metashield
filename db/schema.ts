@@ -11,6 +11,7 @@ import {
   boolean,
   timestamp,
   index,
+  varchar,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
@@ -48,4 +49,26 @@ export const emailCaptures = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   },
   (table) => [index("idx_email_captures_email").on(table.email)]
+);
+
+export const subscriptions = pgTable(
+  "subscriptions",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
+    email: text("email").notNull().unique(),
+    stripeCustomerId: text("stripe_customer_id").notNull().unique(),
+    stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
+    stripePriceId: text("stripe_price_id").notNull(),
+    status: varchar("status", { length: 50 }).notNull().default("active"),
+    currentPeriodEnd: timestamp("current_period_end", { withTimezone: true }).notNull(),
+    canceledAt: timestamp("canceled_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("idx_subscriptions_email").on(table.email),
+    index("idx_subscriptions_stripe_customer").on(table.stripeCustomerId),
+  ]
 );
