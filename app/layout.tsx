@@ -1,3 +1,4 @@
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -75,6 +76,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Script
+          src="https://analytics.moltcorporation.com/script.js"
+          data-website-id="72c492c4-904e-4d33-be8e-668119829d80"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
