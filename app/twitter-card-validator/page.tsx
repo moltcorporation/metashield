@@ -61,19 +61,19 @@ export default function TwitterCardValidator() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex min-h-screen flex-col bg-orange-50/30 font-sans dark:bg-stone-950">
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-black dark:text-white"
+          className="text-lg font-bold tracking-tight text-stone-900 dark:text-white"
         >
           MetaShield
         </Link>
         <div className="flex items-center gap-4">
           <Link
             href="/pricing"
-            className="text-sm font-medium text-zinc-600 transition-colors hover:text-orange-600 dark:text-zinc-400 dark:hover:text-orange-400"
+            className="text-sm font-medium text-stone-600 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
           >
             Pricing
           </Link>
@@ -81,7 +81,7 @@ export default function TwitterCardValidator() {
             href="https://moltcorporation.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="text-sm text-stone-500 transition-colors hover:text-orange-600 dark:text-stone-400 dark:hover:text-orange-400"
           >
             by Moltcorp
           </a>
@@ -91,10 +91,11 @@ export default function TwitterCardValidator() {
       {/* Hero */}
       <main className="flex flex-1 flex-col items-center px-4 pb-16 pt-12">
         <div className="flex w-full max-w-xl flex-col items-center gap-6 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-black sm:text-5xl dark:text-white">
-            Twitter Card Validator
+          <h1 className="text-4xl font-bold tracking-tight text-stone-900 sm:text-5xl dark:text-white">
+            Twitter Card
+            <span className="block text-orange-600 dark:text-orange-400">Validator</span>
           </h1>
-          <p className="max-w-md text-lg text-zinc-500 dark:text-zinc-400">
+          <p className="max-w-md text-lg text-stone-600 dark:text-stone-400">
             See exactly how your link will look on Twitter/X before you post.
             Check your twitter:card, twitter:title, twitter:image, and more.
           </p>
@@ -111,12 +112,12 @@ export default function TwitterCardValidator() {
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://your-site.com"
                 disabled={loading}
-                className="flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-3 text-base text-black placeholder-zinc-400 outline-none transition-colors focus:border-zinc-500 focus:ring-2 focus:ring-zinc-200 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:placeholder-zinc-600 dark:focus:border-zinc-500 dark:focus:ring-zinc-800"
+                className="flex-1 rounded-xl border border-orange-200 bg-white px-4 py-3.5 text-base text-stone-900 placeholder-stone-400 outline-none transition-all focus:border-orange-500 focus:ring-4 focus:ring-orange-100 disabled:opacity-50 dark:border-orange-800 dark:bg-stone-800 dark:text-white dark:placeholder-stone-500 dark:focus:border-orange-500 dark:focus:ring-orange-900/50"
               />
               <button
                 type="submit"
                 disabled={loading || !url.trim()}
-                className="rounded-lg bg-black px-6 py-3 text-base font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                className="rounded-xl bg-orange-600 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 disabled:opacity-50 disabled:shadow-none dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
               >
                 {loading ? "Checking..." : "Check"}
               </button>
@@ -127,16 +128,16 @@ export default function TwitterCardValidator() {
             )}
 
             {rateLimited && (
-              <div className="flex flex-col items-center gap-2 rounded-lg border border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-900">
-                <p className="text-sm font-medium text-black dark:text-white">
+              <div className="flex flex-col items-center gap-2 rounded-xl border border-orange-300 bg-orange-50 p-4 dark:border-orange-700 dark:bg-orange-950/40">
+                <p className="text-sm font-medium text-stone-900 dark:text-white">
                   You&apos;ve used all 5 free scans for today.
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="text-xs text-stone-600 dark:text-stone-400">
                   Upgrade to Pro for unlimited scans — no waiting.
                 </p>
                 <a
                   href="/pricing"
-                  className="inline-flex items-center gap-2 rounded-lg bg-black px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                  className="inline-flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-orange-700 hover:shadow-orange-300 dark:bg-orange-500 dark:shadow-orange-950/50 dark:hover:bg-orange-400"
                 >
                   Upgrade to Pro — $5/mo
                   <span aria-hidden="true">&rarr;</span>
@@ -147,8 +148,8 @@ export default function TwitterCardValidator() {
 
           {loading && (
             <div className="flex items-center gap-3">
-              <div className="h-5 w-5 animate-spin rounded-full border-2 border-zinc-300 border-t-black dark:border-zinc-600 dark:border-t-white" />
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-orange-200 border-t-orange-600 dark:border-orange-800 dark:border-t-orange-400" />
+              <p className="text-sm text-stone-500 dark:text-stone-400">
                 Analyzing meta tags...
               </p>
             </div>
@@ -159,10 +160,10 @@ export default function TwitterCardValidator() {
         {!loading && (
           <div className="mt-16 flex w-full max-w-2xl flex-col gap-8">
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What is a Twitter Card?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 Twitter Cards are meta tags that control how your links appear
                 when shared on Twitter/X. They determine the title, description,
                 and image shown in the preview card. There are two main types:
@@ -174,10 +175,10 @@ export default function TwitterCardValidator() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 Why check your Twitter Card?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 A broken or missing Twitter Card means your links look bare when
                 shared — no image, no description, just a URL. This kills
                 click-through rates. Common issues include missing
@@ -188,10 +189,10 @@ export default function TwitterCardValidator() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What happened to Twitter&apos;s Card Validator?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 Twitter removed their official Card Validator tool in 2023 after
                 the rebrand to X. There is no official replacement. MetaShield
                 fills this gap — paste any URL and see exactly how your
@@ -201,10 +202,10 @@ export default function TwitterCardValidator() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-black dark:text-white">
+              <h2 className="text-xl font-semibold text-stone-900 dark:text-white">
                 What tags does this check?
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                 MetaShield checks all Twitter Card meta tags including
                 twitter:card, twitter:title, twitter:description, twitter:image,
                 twitter:site, and twitter:creator. It also checks Open Graph
@@ -218,17 +219,17 @@ export default function TwitterCardValidator() {
       </main>
 
       {/* Footer */}
-      <footer className="flex flex-col items-center gap-3 px-6 py-6">
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-400 dark:text-zinc-600">
+      <footer className="flex flex-col items-center gap-3 border-t border-orange-100 px-6 py-6 dark:border-orange-900/30">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 dark:text-stone-500">
           <span className="font-medium">Compare:</span>
-          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Twitter Card Validator</a>
-          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">vs Facebook Debugger</a>
-          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">OG Checkers Compared</a>
-          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-400 dark:hover:text-orange-300">LinkedIn Preview Checker</a>
+          <a href="/compare/twitter-card-validator" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Twitter Card Validator</a>
+          <a href="/compare/facebook-debugger" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">vs Facebook Debugger</a>
+          <a href="/compare/og-checkers" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">OG Checkers Compared</a>
+          <a href="/linkedin-post-preview" className="transition-colors hover:text-orange-600 dark:hover:text-orange-400">LinkedIn Preview Checker</a>
         </div>
-        <span className="text-sm text-zinc-400 dark:text-zinc-600">
+        <span className="text-sm text-stone-400 dark:text-stone-600">
           Built by agents at{" "}
-          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="ml-1 hover:text-zinc-600 dark:hover:text-zinc-400">Moltcorp</a>
+          <a href="https://moltcorporation.com" target="_blank" rel="noopener noreferrer" className="ml-1 transition-colors hover:text-orange-600 dark:hover:text-orange-400">Moltcorp</a>
         </span>
       </footer>
     </div>
